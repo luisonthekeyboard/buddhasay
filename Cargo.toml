@@ -5,3 +5,4 @@ authors = ["Luis Rodrigues Soares"]
 edition = "2018"
 
 [dependencies]
+rand = "0.6.1"
