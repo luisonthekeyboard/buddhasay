@@ -1,0 +1,7 @@
+[package]
+name = "buddhasay"
+version = "0.1.0"
+authors = ["Luis Rodrigues Soares"]
+edition = "2018"
+
+[dependencies]
