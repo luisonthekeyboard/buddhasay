@@ -1,5 +1,13 @@
 [package]
 name = "buddhasay"
+description = "Like cowsay, but with a Buddha."
+homepage = "https://github.com/luisonthekeyboard/buddhasay"
+repository = "https://github.com/luisonthekeyboard/buddhasay"
+readme = "README.md"
+keywords = ["buddhasay", "buddha", "motd"]
+categories = ["command-line-utilities"]
+license = "Apache-2.0"
+license-file = "LICENSE"
 version = "0.1.0"
 authors = ["Luis Rodrigues Soares"]
 edition = "2018"
