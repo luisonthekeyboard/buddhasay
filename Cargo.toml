@@ -8,8 +8,8 @@ keywords = ["buddhasay", "buddha", "motd"]
 categories = ["command-line-utilities"]
 license = "Apache-2.0"
 license-file = "LICENSE"
-version = "0.1.1"
-authors = ["Luis Rodrigues Soares"]
+version = "0.2.0"
+authors = ["Luis Rodrigues Soares <luis@luisonthekeyboard.com>"]
 edition = "2018"
 
 [dependencies]
