@@ -1,6 +1,26 @@
 use rand::Rng;
 
+const WRAP_INDEX: usize = 37;
+
+const BUDDHA: [&str; 7] = [
+    " \\",
+    "  \\    ___",
+    "   \\  (-_-) ",
+    "      _) (_ ",
+    "     /     \\",
+    "   _( \\_ _/ )_",
+    "  (_____\\_____)",
+];
+
+
+#[derive(Debug)]
+struct Message<'a> {
+    lines: Vec<&'a str>,
+    max_len: usize,
+}
+
 fn main() {
+
     let sentences = [
         "Roads come into being as people begin to travel with new purpose in places previously unmarked, each step helping to wear a path on the ground.",
         "I brought the teacup into my mouth and the previous night dissolved into oblivion.",
@@ -8,7 +28,7 @@ fn main() {
         "Discipline is found in everyday practice of the rules of Buddhism.",
         "Eating is not done to satisfy hunger or appetite, but to carry out the teachings of the Buddha. The art of eating is itself a Buddhist discipline.",
         "There must be a complete departure from human desires.",
-        "To cleanse the body and the mind is also to cleanse the world around oneself. The face should not be washed because it«s dirty, or left unwashed because it's not.",
+        "To cleanse the body and the mind is also to cleanse the world around oneself. The face should not be washed because it's dirty, or left unwashed because it's not.",
         "The things we find most pleasant pass the most quickly.",
         "Eating is not a question of hunger or satiety, or of food tasting good or bad. The point lays in the act of eating itself. Eating is Buddhism.",
         "Pour all your physical and mental strength into the act of eating.",
@@ -41,7 +61,7 @@ fn main() {
         "It is said that the Buddha attained enlightenment on December 8th. Every year, the first week of December is devoted exclusively to sitting.",
         "When sitting, the person assumes a certain form. To assume this form is to become perfectly one with it, removing all fetters and ego - to be unselfconsciously present in the moment, like air.",
         "You should sit for yourself and persist sitting to the very end.",
-        "Devoting yourself to sitting, getting used to sitting and conquering the painn of sitting are equally pointless. The only point of sitting is to accept unconditionally each moment as it occurs.",
+        "Devoting yourself to sitting, getting used to sitting and conquering the pain of sitting are equally pointless. The only point of sitting is to accept unconditionally each moment as it occurs.",
         "Freedom in Buddhism means liberation from self interest. Liberation not from any external circumstance but from desire.",
         "Days are relentless in their sameness.",
         "By contemplating life as it is, stripped of all extraneous added value, you can let go of a myriad of things that gnaw at your mind.",
@@ -50,7 +70,98 @@ fn main() {
         "Nothing lasts, nothing is finished, nothing is perfect."
     ];
 
-    let sentence = rand::thread_rng().gen_range(0, sentences.len());
+    let sentence = rand::thread_rng().gen_range(0, &sentences.len());
+    let message = split_sentence(&sentences[sentence]);
+    draw_message(&message);
+}
 
-    println!("{}",sentences[sentence]);
+fn fill_line(beg_ch: char, mid_ch: char, mid_len: usize, end_chr: Option<char>) {
+    print!("{}", beg_ch);
+    for _ in 0..mid_len {
+        print!("{}", mid_ch);
+    }
+    if end_chr != None {
+        print!("{}", end_chr.unwrap());
+    }
+    println!();
+}
+
+fn draw_message(m: &Message) {
+
+    // Header
+    fill_line(' ', '_', m.max_len + 2, None);
+    fill_line('/', ' ', m.max_len + 2, Some('\\'));
+
+    // Message
+    for &item in m.lines.iter() {
+        print!("| ");
+        print!("{}", item);
+
+        if item.len() != m.max_len {
+            for _ in 0..(m.max_len - item.len()) {
+                print!(" ");
+            }
+        }
+
+        println!(" |");
+    }
+
+    // Footer
+    fill_line('\\', '_', m.max_len + 2, Some('/'));
+
+    // Buddha
+    let offset = m.max_len - (m.max_len / 3);
+    for &buddha_line in BUDDHA.iter() {
+        for _ in 0..offset {
+            print!(" ");
+        }
+        println!("{}", &buddha_line);
+    }
+}
+
+
+fn previous_whitespace_index(s: &str, i: usize) -> usize {
+    let mut index = i;
+    let b = s.as_bytes();
+
+    while b[index] != b' ' {
+        index -= 1;
+    }
+
+    index
+}
+
+
+fn split_sentence(s: &str) -> Message {
+    let mut message = Message {
+        lines: Vec::new(),
+        max_len: 0,
+    };
+
+    if s.len() <= WRAP_INDEX {
+        message.lines.push(s.trim());
+        message.max_len = s.trim().len();
+    } else {
+        let mut index = WRAP_INDEX;
+        let mut last_end = 0;
+
+        while index < s.len() {
+            let prev_whtspc_idx = previous_whitespace_index(s, index);
+            message.lines.push(&s[last_end..prev_whtspc_idx].trim());
+
+            if message.lines.last().unwrap().len() > message.max_len {
+                message.max_len = message.lines.last().unwrap().len();
+            };
+
+            last_end = prev_whtspc_idx;
+            index = prev_whtspc_idx + WRAP_INDEX;
+        }
+
+        message.lines.push(&s[last_end..].trim());
+        if message.lines.last().unwrap().len() > message.max_len {
+            message.max_len = message.lines.last().unwrap().len();
+        }
+    }
+
+    message
 }
