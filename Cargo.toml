@@ -17,7 +17,6 @@ keywords = ["buddhasay", "buddha", "motd"]
 categories = ["command-line-utilities"]
 
 license = "Apache-2.0"
-license-file = "LICENSE"
 
 [dependencies]
-rand = "0.6.1"
+rand = "0.6.2"
