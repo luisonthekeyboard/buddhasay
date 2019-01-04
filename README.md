@@ -53,3 +53,5 @@ be possible to run `buddhasay | cowsay`, `fortune | buddhasay` or `buddhasay`.
 - Split sentences out of the code;
 - Add tags to the sentences (zen, theravada, book, etc), authors and source;
 - One release script to rule them all;
+- Align naming conventions and naming style;
+- Tests and separate modules;
