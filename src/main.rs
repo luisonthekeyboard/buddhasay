@@ -16,7 +16,6 @@ const BUDDHA: [&str; 7] = [
     "  (_____\\_____)",
 ];
 
-
 #[derive(Debug)]
 struct Message<'a> {
     lines: Vec<&'a str>,
@@ -70,7 +69,6 @@ fn fill_line(beg_ch: char, mid_ch: char, mid_len: usize, end_chr: Option<char>) 
 }
 
 fn draw_message(m: &Message) {
-
     // Header
     fill_line(' ', '_', m.max_len + 2, None);
     fill_line('/', ' ', m.max_len + 2, Some('\\'));
@@ -102,7 +100,6 @@ fn draw_message(m: &Message) {
     }
 }
 
-
 fn previous_whitespace_index(s: &str, i: usize) -> usize {
     let mut index = i;
     let b = s.as_bytes();
@@ -113,7 +110,6 @@ fn previous_whitespace_index(s: &str, i: usize) -> usize {
 
     index
 }
-
 
 fn split_sentence(s: &str) -> Message {
     let mut message = Message {
@@ -129,9 +125,8 @@ fn split_sentence(s: &str) -> Message {
         let mut last_end = 0;
 
         loop {
-
             let prev_whtspc_idx = if index < s.len() {
-                 previous_whitespace_index(s, index)
+                previous_whitespace_index(s, index)
             } else {
                 s.len()
             };
