@@ -50,7 +50,7 @@ Mostly exercises for me to continue learning Rust and systems; in no particular 
 be possible to run `buddhasay | cowsay`, `fortune | buddhasay` or `buddhasay`.
 - Packages for other Linux distros;
 - Package for homebrew;
-- Split sentences out of the code;
+- ~~Split sentences out of the code~~;
 - Add tags to the sentences (zen, theravada, book, etc), authors and source;
 - One release script to rule them all;
 - Align naming conventions and naming style;
