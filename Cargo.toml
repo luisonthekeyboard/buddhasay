@@ -18,5 +18,17 @@ categories = ["command-line-utilities"]
 
 license = "Apache-2.0"
 
+include = ["resources/buddhasay.toml"]
+
 [dependencies]
 rand = "0.6.2"
+
+toml = "0.4.10"
+
+# The core APIs, including the Serialize and Deserialize traits. Always
+# required when using Serde.
+serde = "1.0"
+
+# Support for #[derive(Serialize, Deserialize)]. Required if you want Serde
+# to work for structs and enums defined in your crate.
+serde_derive = "1.0"
