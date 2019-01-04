@@ -128,21 +128,26 @@ fn split_sentence(s: &str) -> Message {
         let mut index = WRAP_INDEX;
         let mut last_end = 0;
 
-        while index < s.len() {
-            let prev_whtspc_idx = previous_whitespace_index(s, index);
+        loop {
+
+            let prev_whtspc_idx = if index < s.len() {
+                 previous_whitespace_index(s, index)
+            } else {
+                s.len()
+            };
+
             message.lines.push(&s[last_end..prev_whtspc_idx].trim());
 
             if message.lines.last().unwrap().len() > message.max_len {
                 message.max_len = message.lines.last().unwrap().len();
             };
 
+            if index >= s.len() {
+                break;
+            }
+
             last_end = prev_whtspc_idx;
             index = prev_whtspc_idx + WRAP_INDEX;
-        }
-
-        message.lines.push(&s[last_end..].trim());
-        if message.lines.last().unwrap().len() > message.max_len {
-            message.max_len = message.lines.last().unwrap().len();
         }
     }
 
