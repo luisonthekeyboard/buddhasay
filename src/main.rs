@@ -98,6 +98,7 @@ fn draw_message(m: &Message) {
         }
         println!("{}", &buddha_line);
     }
+    println!();
 }
 
 fn previous_whitespace_index(s: &str, i: usize) -> usize {
