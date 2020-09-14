@@ -4,6 +4,8 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
+      - echo Installing Rustup...
+      - curl https://sh.rustup.rs -sSf | sh -s -- -y
     finally:
       - echo This always runs even if the update or install command fails
   pre_build:
