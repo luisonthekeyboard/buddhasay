@@ -1,0 +1,25 @@
+[package]
+
+name = "buddhasay"
+version = "0.6.3"
+authors = ["Luis Rodrigues Soares <luis@luisonthekeyboard.com>"]
+
+edition = "2018"
+
+description = "Like cowsay, but with a Buddha."
+
+homepage = "https://gitlab.com/luisonthekeyboard/buddhasay"
+repository = "https://gitlab.com/luisonthekeyboard/buddhasay"
+
+readme = "README.md"
+
+keywords = ["buddhasay", "buddha", "motd"]
+categories = ["command-line-utilities"]
+
+license = "Apache-2.0"
+
+[dependencies]
+rand = "0.6"
+toml = "0.4"
+serde = "1.0"
+serde_derive = "1.0"
