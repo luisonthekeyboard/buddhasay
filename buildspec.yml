@@ -6,6 +6,9 @@ phases:
       - echo Entered the install phase...
       - echo Installing Rustup...
       - curl https://sh.rustup.rs -sSf | sh -s -- -y
+      - source $HOME/.cargo/env
+      - rustc --version
+      - echo Installing Rustup... DONE.
     finally:
       - echo This always runs even if the update or install command fails
   pre_build:
@@ -17,6 +20,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
+      - make clean build
     finally:
       - echo This always runs even if the install command fails
   post_build:
